@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="utf-8">
+      <meta name="keywords" content="NEW EPISODE!">
+      <meta name="description" content="">
+      <title>Página 1</title>
+      <link rel="stylesheet" href="nicepage.css" media="screen">
+  <link rel="stylesheet" href="Página-1.css" media="screen">
+      <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+      <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+      <meta name="generator" content="Nicepage 4.18.5, nicepage.com">
+      <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+      <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900|Merriweather:300,300i,400,400i,700,700i,900,900i">
+      
+      
+      
+      
+      
+      
+      <script type="application/ld+json">{
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "",
+      "logo": "images/logosupernova412.png",
+      "sameAs": [
+          "https://facebook.com/name",
+          "https://twitter.com/name",
+          "https://instagram.com/name",
+          "https://facebook.com/name",
+          "https://twitter.com/name",
+          "https://instagram.com/name",
+          "https://facebook.com/name",
+          "https://twitter.com/name",
+          "https://instagram.com/name",
+          "https://facebook.com/name",
+          "https://twitter.com/name",
+          "https://instagram.com/name"
+      ]
+  }</script>
+      <meta name="theme-color" content="#478ac9">
+      <meta name="twitter:site" content="@">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Página 1">
+      <meta name="twitter:description" content="">
+      <meta property="og:title" content="Página 1">
+      <meta property="og:type" content="website">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>HapeRemake</title>
+
+        <!-- Babylon.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+
+<script src="JS/meshwriter.min.js"></script>
+
+  <script src='https://assets.codepen.io/16327/gsap-latest-beta.min.js'></script>
+<script src='https://assets.codepen.io/16327/ScrollTrigger.min.js'></script>
+
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+               /*   z-index: 99999!important;  */
+            }
+
+section {
+
+	width: 100%;
+	height: 100vh;	
+	position: relative;
+
+}
+
+.section-one {
+
+}
+
+.section-two {
+
+}
+
+.section-three {
+
+}
+
+.section-four {
+
+}
+
+.section-five {
+
+
+}
+
+
+.scene.one {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  pointer-events: none;
+}
+
+iframe {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 860vh;
+  width: 100vw;
+  }
+
+section {
+background-color: transparent!important;
+z-index: 50!important;
+}
+  
+.circle {
+  position: absolute;
+  width: 270px;
+  height: 30px;
+  top: 50%;
+  left: 20%;
+  border-radius: 20px;
+  margin: -50px 0 0 -50px;
+  background: transparent;
+  color:white!important;
+  backface-visibility: hidden;
+  text-align: center;
+}
+
+.BG {
+   position: absolute;
+  width: 280px;
+  height: 50px;
+  top: 0%;
+  left: 0%;
+  border-radius: 20px;
+  background: black;
+  color:white!important;
+  backface-visibility: hidden;  
+  opacity: 0.6;
+}
+
+.Inner {
+   position: absolute;
+  width: 270px;
+  height: 30px;
+  top: 15%;
+  left: 0%;
+  border-radius: 20px;
+  background: transparent;
+  color:white!important;
+  backface-visibility: hidden;  
+    
+}
+
+
+.section3Text1 {
+position: relative;
+left: 0px;
+opacity: 0;    
+}
+
+.section3Text2 {
+ opacity: 0;   
+}
+
+.Cam {
+position: fixed;    
+left: 0px;
+top: 100px;
+z-index: 99999999!important;
+}
+            
+        </style>
+    </head>
+<body>
+ 
+ 
+  
+
+
+
+
+
+<style>
+    
+/* Navbar */ 
+
+@charset "UTF-8";
+.navigation {
+  height: 70px;
+  background: #262626;
+position: fixed!important;  
+width: 100%;
+left: 0px;
+top: 0px;
+z-index: 9999999999999999999999!important;
+}
+
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: 70px;
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+.brand a,
+.brand a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+
+
+
+
+article {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+ 
+</style>
+
+
+
+
+
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+ 
+ 
+  
+<script>
+
+(function($) { // Begin jQuery
+  $(function() { // DOM ready
+    // If a link has a dropdown, add sub menu toggle.
+    $('nav ul li a:not(:only-child)').click(function(e) {
+      $(this).siblings('.nav-dropdown').toggle();
+      // Close one dropdown when selecting another
+      $('.nav-dropdown').not($(this).siblings()).hide();
+      e.stopPropagation();
+    });
+    // Clicking away from dropdown will remove the dropdown class
+    $('html').click(function() {
+      $('.nav-dropdown').hide();
+    });
+    // Toggle open and close nav styles on click
+    $('#nav-toggle').click(function() {
+      $('nav ul').slideToggle();
+    });
+    // Hamburger to X toggle
+    $('#nav-toggle').on('click', function() {
+      this.classList.toggle('active');
+    });
+  }); // end DOM ready
+})(jQuery); // end jQuery      
+      
+</script>    
+
+    
+    <canvas id="renderCanvas"></canvas>
+   
+
+<div class="Cam" id="contentInner">
+
+<button onclick='changeCam();'> Cam </button>
+
+<script>
+// Turn on and off camera
+
+var lightState = "on";  
+    
+function changeCam(){
+
+
+if (lightState == "on") {
+    
+    lightState = "off"
+var camChange = document.getElementById('main');    
+camChange.style.display = 'none'; 
+    
+  } else {
+      
+    lightState = "on"
+var camChange = document.getElementById('main');     
+camChange.style.display = '';  
+    
+  }
+
+
+}
+    
+</script>
+    
+</div>
+
+
+<div class="circle" id="soundText"> 
+<div class="BG"> </div>
+<div class="Inner">
+&nbsp; 
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16">
+  <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+  <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+  <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/>
+</svg>
+Click anywhere to enable the sound
+</div>
+</div>
+
+
+ <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.4/TweenMax.min.js'></script>
+
+<script>
+var $circle = $('.circle');
+
+function moveCircle(e) {
+	TweenLite.to($circle, 0.0, {
+    css: {
+      left: e.pageX,
+      top: e.pageY
+    }
+  });
+}
+
+$(window).on('mousemove', moveCircle);
+
+</script>   
+    
+  <audio id="sound" controls loop style="display: none!important">
+  <source src="Music/meb2.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>    
+
+<script>
+
+var Audiocontent = document.getElementById('soundText');
+
+
+document.addEventListener('click', musicPlay);
+function musicPlay() {
+    document.getElementById('sound').play();
+    document.removeEventListener('click', musicPlay);
+    Audiocontent.style.display = 'none';
+}
+</script>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<div id="main">
+
+<section class="section-one">
+  <body class="u-body u-xl-mode" data-lang="es"><header class="u-black u-clearfix u-header u-header" id="sec-395a"><img class="u-expanded-width-md u-expanded-width-xl u-expanded-width-xs u-image u-image-default u-image-1" src="images/sdsd.png" alt="" data-image-width="1507" data-image-height="40"><a href="Home.html" class="u-image u-logo u-image-2" data-image-width="1920" data-image-height="459" title="Home">
+    <img src="images/logosupernova412.png" class="u-logo-image u-logo-image-1">
+  </a><nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XL">
+    <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+      <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="font-size: calc(1em + 14px);">
+        <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+        <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+      </a>
+    </div>
+    <div class="u-custom-menu u-nav-container">
+      <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 10px 20px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 10px 20px;">Abou US</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 10px 20px;">Contact Us</a>
+</li></ul>
+    </div>
+    <div class="u-custom-menu u-nav-container-collapse">
+      <div class="u-border-1 u-border-grey-75 u-container-style u-grey-5 u-inner-container-layout u-sidenav u-sidenav-1" data-offcanvas-width="345">
+        <div class="u-inner-container-layout u-sidenav-overflow">
+          <div class="u-menu-close"></div>
+          <ul class="u-align-center u-custom-font u-font-merriweather u-nav u-popupmenu-items u-spacing-13 u-text-active-black u-text-black u-text-hover-black u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Abou US</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Contact Us</a>
+</li></ul>
+        </div>
+      </div>
+      <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+    </div>
+  </nav><div class="u-enable-responsive u-hidden-sm u-hidden-xs u-social-icons u-spacing-10 u-social-icons-1">
+    <a class="u-social-url" title="facebook" target="_blank" href="https://facebook.com/name"><span class="u-file-icon u-icon u-social-facebook u-social-icon u-text-white u-icon-1"><img src="images/49084-67c8cf88.png" alt=""></span>
+    </a>
+    <a class="u-social-url" title="twitter" target="_blank" href="https://twitter.com/name"><span class="u-file-icon u-icon u-social-icon u-social-twitter u-text-white u-icon-2"><img src="images/20837-323562e4.png" alt=""></span>
+    </a>
+    <a class="u-social-url" title="instagram" target="_blank" href="https://instagram.com/name"><span class="u-file-icon u-icon u-social-icon u-social-instagram u-text-white u-icon-3"><img src="images/733635-406fe701.png" alt=""></span>
+    </a>
+  </div><div class="u-enable-responsive u-hidden-sm u-hidden-xs u-social-icons u-spacing-10 u-social-icons-2">
+    <a class="u-social-url" title="facebook" target="_blank" href="https://facebook.com/name"><span class="u-file-icon u-icon u-social-facebook u-social-icon u-text-white u-icon-4"><img src="images/5968898-6f89bc8c.png" alt=""></span>
+    </a>
+    <a class="u-social-url" title="twitter" target="_blank" href="https://twitter.com/name"><span class="u-file-icon u-icon u-social-icon u-social-twitter u-text-white u-icon-5"><img src="images/2111491-ac95b298.png" alt=""></span>
+    </a>
+    <a class="u-social-url" title="instagram" target="_blank" href="https://instagram.com/name"><span class="u-file-icon u-icon u-social-icon u-social-instagram u-text-white u-icon-6"><img src="images/2111727-75e5b9fe.png" alt=""></span>
+    </a>
+  </div></header>
+<section class="u-clearfix u-section-1" id="sec-3ebb">
+  
+  <div class="u-clearfix u-sheet u-sheet-1"><span class="u-dialog-link u-hidden-sm u-hidden-xs u-hover-feature u-icon u-text-grey-5 u-icon-1" data-href="#carousel_34bb" data-animation-out="0" data-animation-name="customAnimationIn" data-animation-duration="1000"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 60 60" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1681"></use></svg><svg class="u-svg-content" viewBox="0 0 60 60" x="0px" y="0px" id="svg-1681" style="enable-background:new 0 0 60 60;"><path d="M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M45.563,30.826l-22,15
+C23.394,45.941,23.197,46,23,46c-0.16,0-0.321-0.038-0.467-0.116C22.205,45.711,22,45.371,22,45V15c0-0.371,0.205-0.711,0.533-0.884
+c0.328-0.174,0.724-0.15,1.031,0.058l22,15C45.836,29.36,46,29.669,46,30S45.836,30.64,45.563,30.826z"></path></svg></span>
+    <h1 class="u-custom-font u-font-titillium-web u-text u-text-white u-text-1">NEW EPISODE!</h1>
+    <h3 class="u-custom-font u-font-merriweather u-text u-text-white u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1000" data-animation-direction="">
+      <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-custom-font u-dialog-link u-font-titillium-web u-hidden-sm u-hidden-xs u-hover-none u-none u-text-grey-5 u-text-hover-custom-color-2 u-btn-1" href="#carousel_34bb">PLAY TRAILER</a>
+    </h3>
+    <div class="u-countdown u-countdown-1" data-timer-id="80f9" data-type="to-date" data-target-date="Thu, 15 Sep 2022 09:11:43 GMT" data-for="everyone" data-direction="down" data-time-left="750m" data-target-number="100" data-start-time="Wed Aug 24 2022 12:04:15 GMT-0500 (Hora est. Pacífico, Sudamérica)" data-frequency="1s" data-after-count="none" data-redirect-url="https://">
+      <div class="u-countdown-wrapper u-spacing-20">
+        <div class="u-countdown-item u-countdown-years u-hidden u-spacing-10">
+          <div class="u-countdown-counter u-countdown-counter-1"><div class="u-countdown-number u-text-white">0</div><div class="u-countdown-number u-hidden u-text-white">0</div></div>
+          <div class="u-countdown-label u-custom-font u-font-titillium-web u-text-white u-countdown-label-1">Years</div>
+        </div>
+        <div class="u-countdown-separator u-hidden u-text-white u-countdown-separator-1">:</div>
+        <div class="u-countdown-days u-countdown-item u-spacing-10">
+          <div class="u-countdown-counter u-countdown-counter-2"><div class="u-countdown-number u-text-white">1</div><div class="u-countdown-number u-text-white">0</div><div class="u-countdown-number u-hidden u-text-white">0</div></div>
+          <div class="u-countdown-label u-custom-font u-font-titillium-web u-text-white u-countdown-label-2">Days</div>
+        </div>
+        <div class="u-countdown-separator u-text-white u-countdown-separator-2">:</div>
+        <div class="u-countdown-hours u-countdown-item u-spacing-10">
+          <div class="u-countdown-counter u-countdown-counter-3"><div class="u-countdown-number u-text-white">1</div><div class="u-countdown-number u-text-white">8</div></div>
+          <div class="u-countdown-label u-custom-font u-font-titillium-web u-text-white u-countdown-label-3">Hours</div>
+        </div>
+        <div class="u-countdown-separator u-text-white u-countdown-separator-3">:</div>
+        <div class="u-countdown-item u-countdown-minutes u-spacing-10">
+          <div class="u-countdown-counter u-countdown-counter-4"><div class="u-countdown-number u-text-white">5</div><div class="u-countdown-number u-text-white">9</div></div>
+          <div class="u-countdown-label u-custom-font u-font-titillium-web u-text-white u-countdown-label-4">Minutes</div>
+        </div>
+        <div class="u-countdown-separator u-text-white u-countdown-separator-4">:</div>
+        <div class="u-countdown-item u-countdown-seconds u-spacing-10">
+          <div class="u-countdown-counter u-countdown-counter-5"><div class="u-countdown-number u-text-white">3</div><div class="u-countdown-number u-text-white">1</div></div>
+          <div class="u-countdown-label u-custom-font u-font-titillium-web u-text-white u-countdown-label-5">Seconds</div>
+        </div>
+        <div class="u-countdown-separator u-hidden u-text-white u-countdown-separator-5">:</div>
+        <div class="u-countdown-item u-countdown-numbers u-hidden u-spacing-10">
+          <div class="u-countdown-counter u-countdown-counter-6"><div class="u-countdown-number u-text-white">0</div><div class="u-countdown-number u-text-white">0</div></div>
+          <div class="u-countdown-label u-custom-font u-font-titillium-web u-text-white u-countdown-label-6">Items</div>
+        </div>
+      </div>
+      <div class="u-countdown-message u-hidden">
+        <p>Sorry, the time is up.</p>
+      </div>
+    </div>
+    <div class="u-clearfix u-custom-html u-hidden-md u-hidden-sm u-hidden-xs u-custom-html-1">
+      <style> .meb2 , meb::after {
+width: 280px;
+height: 76px;
+font-size: 30px;
+font-family: 'Bebas Neue', cursive;
+background: linear-gradient(45deg, transparent 5%, #ffffff 5%);
+border: 0;
+color: rgb(0, 0, 0);
+letter-spacing: 3px;
+line-height: 78px;
+box-shadow: 6px 0px 0px #000000;
+outline: transparent;
+position: relative;
+}
+.meb2::after {
+--slice-0: inset(50% 50% 50% 50%);
+--slice-1: inset(80% -6px 0 0);
+--slice-2: inset(50% -6px 30% 0);
+--slice-3: inset(10% -6px 85% 0);
+--slice-4: inset(40% -6px 43% 0);
+--slice-5: inset(80% -6px 5% 0);
+
+content: 'AVAILABLE NOW';
+display: block;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(45deg, transparent 3%, #000000 3%, #000000 5%, #ffffff 5%);
+text-shadow: -3px -3px 0px #f80505, 3px 3px 0px #00E6F6;
+clip-path: var(--slice-0);
+}
+.meb2:hover::after {
+animation: 1s glitch;
+animation-timing-function: steps(2, end);
+}
+@keyframes glitch {
+0% {
+clip-path: var(--slice-1);
+transform: translate(-20px, -10px);
+}
+10% {
+clip-path: var(--slice-3);
+transform: translate(10px, 10px);
+}
+20% {
+clip-path: var(--slice-1);
+transform: translate(-10px, 10px);
+}
+30% {
+clip-path: var(--slice-3);
+transform: translate(0px, 5px);
+}
+40% {
+clip-path: var(--slice-2);
+transform: translate(-5px, 0px);
+}
+50% {
+clip-path: var(--slice-3);
+transform: translate(5px, 0px);
+}
+60% {
+clip-path: var(--slice-4);
+transform: translate(5px, 10px);
+}
+70% {
+clip-path: var(--slice-2);
+transform: translate(-10px, 10px);
+}
+80% {
+clip-path: var(--slice-5);
+transform: translate(20px, -10px);
+}
+90% {
+clip-path: var(--slice-1);
+transform: translate(-10px, 0px);
+}
+100% {
+clip-path: var(--slice-1);
+transform: translate(0);
+}
+} </style>
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+      <a href="Home.html#carousel_26d8">
+        <button class="meb2">SEE EPISODES!</button>
+      </a>
+    </div>
+  </div>
+</section>
+<section class="u-clearfix u-section-2" id="sec-0dc5">
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <h3 class="u-custom-font u-font-titillium-web u-text u-text-white u-text-1" data-animation-name="flipIn" data-animation-duration="1500" data-animation-direction="X"><b>A Story-driven project on Cardano.</b>
+    </h3>
+    <p class="u-custom-font u-font-titillium-web u-text u-text-grey-10 u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1000"><b>Join one of the four factions on a mission to save humanity or destroy it! Choose wisely.&nbsp;</b>
+    </p>
+  </div>
+</section>
+<section class="u-clearfix u-section-3" id="sec-a6a2">
+  <div class="u-clearfix u-sheet u-sheet-1">
+    <h3 class="u-custom-font u-font-titillium-web u-text u-text-white u-text-1" data-animation-name="flipIn" data-animation-duration="1500" data-animation-direction="X"><b></b><b>8000 mechs, all original hand drawn 3D art.&nbsp;</b>
+    </h3>
+    <p class="u-custom-font u-font-titillium-web u-text u-text-grey-10 u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1000"><b>Get ready together with your mech to become part of the most exciting projects and series.</b>
+    </p>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="u-align-center u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-dialog-section-6" id="carousel_34bb" data-dialog-show-on="click">
+  <div class="u-align-left u-border-2 u-border-palette-1-base u-container-style u-dialog u-radius-20 u-shape-round u-white u-dialog-1">
+    <div class="u-container-layout u-container-layout-1">
+      <div class="u-uploaded-video u-video u-video-contain u-video-1">
+        <div class="embed-responsive">
+          <video class="embed-responsive-item" data-autoplay="true" muted="1" controls="" playsinline="">
+            <source src="files/Supernova11.mp4" type="video/mp4">
+            <p>Your browser does not support HTML5 video.</p>
+          </video>
+        </div>
+      </div>
+    </div><button class="u-dialog-close-button u-icon u-icon-rectangle u-radius-5 u-white u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 413.348 413.348" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-cdad"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 413.348 413.348" id="svg-cdad"><path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"></path></svg></button>
+  </div>
+</section><style> .u-dialog-section-6 {
+min-height: 826px;
+}
+
+.u-dialog-section-6 .u-dialog-1 {
+width: 1140px;
+min-height: 534px;
+box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4);
+height: auto;
+margin: 204px auto 60px;
+}
+
+.u-dialog-section-6 .u-container-layout-1 {
+padding: 0 0 40px;
+}
+
+.u-dialog-section-6 .u-video-1 {
+width: 1109px;
+height: 436px;
+margin: 54px 0 0 auto;
+}
+
+.u-dialog-section-6 .u-icon-1 {
+width: 41px;
+height: 41px;
+left: auto;
+top: 10px;
+position: absolute;
+background-image: none;
+right: 13px;
+padding: 14px;
+}
+
+@media (max-width: 1199px) {
+.u-dialog-section-6 .u-dialog-1 {
+width: 940px;
+}
+
+.u-dialog-section-6 .u-video-1 {
+width: 940px;
+height: 369px;
+}
+}
+
+@media (max-width: 991px) {
+.u-dialog-section-6 .u-dialog-1 {
+width: 720px;
+}
+
+.u-dialog-section-6 .u-container-layout-1 {
+padding: 0 0 30px;
+}
+
+.u-dialog-section-6 .u-video-1 {
+width: 720px;
+height: 283px;
+}
+}
+
+@media (max-width: 767px) {
+.u-dialog-section-6 .u-dialog-1 {
+width: 540px;
+}
+
+.u-dialog-section-6 .u-video-1 {
+width: 540px;
+height: 212px;
+}
+}
+
+@media (max-width: 575px) {
+.u-dialog-section-6 .u-dialog-1 {
+width: 340px;
+}
+
+.u-dialog-section-6 .u-container-layout-1 {
+padding-bottom: 25px;
+}
+
+.u-dialog-section-6 .u-video-1 {
+width: 340px;
+height: 133px;
+}
+}</style>
+</body>
+</section>
+
+
+
+
+
+<section class="section-two">
+
+
+
+
+
+  
+</section>
+
+
+
+
+
+<section class="section-four">
+    
+
+
+</section>
+
+
+
+
+
+<section class="section-five">
+
+  </section>
+
+  
+<section class="section-six">
+    
+  <iframe src="gdm\index.html"></iframe>
+
+
+
+
+
+
+
+
+    
+
+
+</section>
+
+
+
+
+
+
+</section>
+
+ </div>
+ 
+    
+ <script>
+
+  var canvas = document.getElementById("renderCanvas");
+
+   var startRenderLoop = function (engine, canvas) {
+       engine.runRenderLoop(function () {
+           if (sceneToRender && sceneToRender.activeCamera) {
+               sceneToRender.render();
+           }
+       });
+   }
+
+   var engine = null;
+   var scene = null;
+   var sceneToRender = null;
+   var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+   const createScene = function () {
+const scene = new BABYLON.Scene(engine);
+
+
+// scene color
+scene.clearColor = new BABYLON.Color3(0.53, 0.05, 0.05);
+//scene.clearColor = new BABYLON.Color3(0, 0, 0);
+
+// HapeBar
+
+function hapeBar(){
+
+var lightState = "on"; 
+
+document.addEventListener('keydown', function(event)
+{
+ var code = event.keyCode || event.which;
+ if (code === 32) { 
+
+if (lightState == "on") {
+
+lightState = "off"
+scene.clearColor = new BABYLON.Color3(0, 0, 0);
+
+} else {
+ 
+lightState = "on"
+scene.clearColor = new BABYLON.Color3(158, 0, 0);
+
+}
+
+
+ }
+
+   
+});     
+
+}
+
+
+
+
+var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, 0, 0), scene);
+//var camera = new BABYLON.ArcRotateCamera("camera", Math.PI / -2, Math.PI / 2.5, 1, new BABYLON.Vector3(0, 0, 0)); 
+camera.attachControl(canvas, true);
+
+       //camera.lowerRadiusLimit = 15;
+       //camera.upperRadiusLimit = 15; // 30
+       //camera.wheelDeltaPercentage = 1;    
+
+camera.position.set(0.04, 7, 0) // XYZ
+
+
+//contentInner
+var contentInner = document.getElementById('contentInner');
+//contentInner.innerHTML = ` <button onclick='changeCam();'> Cam </button> `; 
+
+
+
+const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1000,1000, 23));
+
+// Glowing effect on emissive materials
+var gl = new BABYLON.GlowLayer("glow", scene, { mainTextureSamples: 4 }); 
+
+
+const ground = BABYLON.MeshBuilder.CreateBox("box", {height: 1, width: 1, depth: 1 });
+
+ground.material = new BABYLON.StandardMaterial("road", scene)
+ground.material.diffuseTexture = new BABYLON.Texture("Textures/Wood_Floor_006_COLOR (2).jpg", scene);
+ground.material.bumpTexture = new BABYLON.Texture("Textures/Stage_Floor_001_normal.jpg", scene);	
+ground.material.specularTexture = new BABYLON.Texture("Textures/Stage_Floor_001_ambientOcclusion.jpg", scene);    
+
+      ground.material.bumpTexture.uScale = 20;
+      ground.material.bumpTexture.vScale = 20;
+         
+      ground.material.diffuseTexture.uScale = 20;
+      ground.material.diffuseTexture.vScale = 20;  
+      
+      ground.material.specularTexture.uScale = 20;
+      ground.material.specularTexture.vScale = 20;  
+
+
+ground.position.z = 7
+ground.position.y = -6// -6
+ground.isVisible = false 
+
+
+
+// Mirror
+var mirror = BABYLON.Mesh.CreateBox("Mirror", 1.0, scene);
+mirror.scaling = new BABYLON.Vector3(100.0, 0.01, 100.0);
+mirror.material = new BABYLON.StandardMaterial("mirror", scene);
+mirror.material.reflectionTexture = new BABYLON.MirrorTexture("mirror", {ratio: 0.5}, scene, true);
+mirror.material.reflectionTexture.mirrorPlane = new BABYLON.Plane(0, -1, 0, 0); // 0, -5.0, 0, -2.0
+mirror.material.reflectionTexture.renderList.push(  );
+mirror.material.reflectionTexture.level = 1.0;
+mirror.material.reflectionTexture.adaptiveBlurKernel = 32;
+mirror.position = new BABYLON.Vector3(0, 0, 0);
+
+
+mirror.material.diffuseColor = new BABYLON.Color3(0.67, 0.04, 0.09);
+mirror.material.diffuseTexture = new BABYLON.Texture("Textures/ttx4.jpg", scene); // basecolor
+//mirror.material.bumpTexture = new BABYLON.Texture("Textures/Tiles_011_NORM.jpg", scene);   // normal
+
+ //     mirror.material.bumpTexture.uScale = 20;
+   //   mirror.material.bumpTexture.vScale = 20;
+         
+     // mirror.material.diffuseTexture.uScale = 20;
+      //mirror.material.diffuseTexture.vScale = 20;  
+mirror.parent = ground;
+
+
+/*
+const player = BABYLON.MeshBuilder.CreateBox("box", {height: 0.5, width: 0.5, depth: 0.5 });
+player.isVisible = false;
+player.position.y = 10
+player.position.z = 10
+camera.lockedTarget = player;
+player.parent = ground
+*/
+
+// Model
+
+const charBox = BABYLON.MeshBuilder.CreateBox("box", {height: 0.5, width: 0.5, depth: 0.5 });
+charBox.isVisible = false;
+charBox.position.z = 2
+
+
+BABYLON.SceneLoader.ImportMesh("", "", "Models/Walk4.glb", scene, function (newMeshes, particleSystems, skeletons) { 
+//BABYLON.SceneLoader.ImportMesh("", "", "Models/SecurityCam.glb", scene, function (newMeshes, particleSystems, skeletons) {    
+
+var character = newMeshes[0];
+
+var PI = Math.PI / -1;
+
+character.rotation = new BABYLON.Vector3(0, PI, 0);
+character.position.y = 6
+character.position.z = 1 // 1
+character.position.x = 0
+character.scaling = new BABYLON.Vector3(0.045 , 0.045, 0.045);
+character.parent = ground;
+
+
+//character.scaling = new BABYLON.Vector3(0.04, 0.04, 0.04);
+//character.parent = charBox;
+
+// loop for mirror
+
+for (let i = 0; i < newMeshes.length; i++) {
+
+mirror.material.reflectionTexture.renderList.push( newMeshes[i] );
+
+
+} 
+
+
+//init the animation from model
+const firstAnim = scene.getAnimationGroupByName("Walk");
+firstAnim.start(true, 1.0, firstAnim.from, firstAnim.to, false);
+
+   });
+
+
+const torus = BABYLON.MeshBuilder.CreateTorus("torus", {thickness: 0.25, diameter: 20});
+torus.parent = ground;
+torus.position.y = 12;
+torus.isVisible = false
+
+// Lamps
+var GlowMat = new BABYLON.StandardMaterial("redMat", scene);
+GlowMat.emissiveColor = new BABYLON.Color3(1, 1, 1); // RGB colors
+
+
+const Lamp1 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {  });
+Lamp1.position.z = 0
+Lamp1.position.y = 15;
+Lamp1.position.x = 10
+Lamp1.scaling = new BABYLON.Vector3(0.05, 2, 0.05);
+Lamp1.parent = ground;
+Lamp1.material = GlowMat;
+
+
+const Lamp2 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {  });
+Lamp2.position.z = 0
+Lamp2.position.y = 15;
+Lamp2.position.x = -10
+Lamp2.scaling = new BABYLON.Vector3(0.05, 2, 0.05);
+Lamp2.parent = ground;
+Lamp2.material = GlowMat;
+
+const Lamp3 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {  });
+Lamp3.position.z = 10
+Lamp3.position.y = 15;
+Lamp3.position.x = 0
+Lamp3.scaling = new BABYLON.Vector3(0.05, 2, 0.05);
+Lamp3.parent = ground;
+Lamp3.material = GlowMat;
+
+const Lamp4 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {  });
+Lamp4.position.z = -10
+Lamp4.position.y = 15;
+Lamp4.position.x = 0
+Lamp4.scaling = new BABYLON.Vector3(0.05, 2, 0.05);
+Lamp4.parent = ground;
+Lamp4.material = GlowMat;
+
+
+const Lamp5 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {  });
+Lamp5.position.z = 5
+Lamp5.position.x = 5
+Lamp5.position.y = 15;
+Lamp5.scaling = new BABYLON.Vector3(0.05, 2, 0.05);
+Lamp5.parent = ground;
+Lamp5.material = GlowMat;
+
+
+const Lamp6 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {  });
+Lamp6.position.z = -5
+Lamp6.position.x = -5
+Lamp6.position.y = 15;
+Lamp6.scaling = new BABYLON.Vector3(0.05, 2, 0.05);
+Lamp6.parent = ground;
+Lamp6.material = GlowMat;
+
+mirror.material.reflectionTexture.renderList.push( Lamp1 );
+mirror.material.reflectionTexture.renderList.push( Lamp2 );
+mirror.material.reflectionTexture.renderList.push( Lamp3 );
+mirror.material.reflectionTexture.renderList.push( Lamp4 );
+
+scene.registerBeforeRender(() => { 
+
+Lamp1.rotation.x += 0.01    
+Lamp2.rotation.x -= 0.01
+Lamp3.rotation.x += 0.01 
+Lamp4.rotation.x -= 0.01  
+Lamp5.rotation.x -= 0.01  
+Lamp6.rotation.x += 0.01 
+});
+
+
+// Particles
+
+// Create a particle system
+var particleSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
+particleSystem.parent = ground
+
+//Texture of each particle
+particleSystem.particleTexture = new BABYLON.Texture("Textures/particule.png", scene);
+
+// Where the particles come from
+particleSystem.emitter = BABYLON.Vector3.Zero(); // the starting position
+particleSystem.minEmitBox = new BABYLON.Vector3(-1, -1, -1); // Starting all from
+particleSystem.maxEmitBox = new BABYLON.Vector3(1, 1, 1); // To...
+
+// Colors of all particles
+particleSystem.color1 = new BABYLON.Color4(0.99, 0.98, 0.98, 0);
+particleSystem.color2 = new BABYLON.Color4(1, 1, 1, 0);
+particleSystem.colorDead = new BABYLON.Color4(1, 1, 1, 0); 
+
+// Size of each particle (random between...
+particleSystem.minSize = 0;
+particleSystem.maxSize = 0;
+// both 0 so size must be 0 at start
+
+//new property to give final size for particles
+particleSystem.finalSize = 0.2;
+
+// Life time of each particle (random between...
+particleSystem.minLifeTime = 4;
+particleSystem.maxLifeTime = 8;
+
+// Emission rate
+particleSystem.emitRate = 200;
+
+// Direction of each particle after it has been emitted
+particleSystem.direction1 = new BABYLON.Vector3(10, 10, -10);
+particleSystem.direction2 = new BABYLON.Vector3(-10, -10, 10);
+
+// Speed
+//particleSystem.minEmitPower = 1;
+//particleSystem.maxEmitPower = 1;
+particleSystem.updateSpeed = 0.005;
+
+particleSystem.updateFunction  = function(particles) {
+           for (var index = 0; index < particles.length; index++) {
+               var particle = particles[index];
+               particle.age += this._scaledUpdateSpeed;
+
+               if (particle.age < particle.lifeTime * .35) {
+                   particle.size = particleSystem.finalSize * particle.age / (particle.lifeTime * 0.35);
+               }
+
+               if (particle.age >= particle.lifeTime) { // Recycle by swapping with last particle
+                   this.recycleParticle(particle);
+                   index--;
+                   continue;
+               }
+               else {
+       var speed = this._scaledUpdateSpeed * 2;
+       if (particle.age >= particle.lifeTime / 2) {
+         speed = -speed;
+       }
+       
+                   particle.colorStep.scaleToRef(speed, this._scaledColorStep);
+       
+       
+                   particle.color.addInPlace(this._scaledColorStep);
+
+                   if (particle.color.a < 0)
+                       particle.color.a = 0;
+
+                   particle.angle += particle.angularSpeed * this._scaledUpdateSpeed;
+
+                   particle.direction.scaleToRef(this._scaledUpdateSpeed, this._scaledDirection);
+                   particle.position.addInPlace(this._scaledDirection);
+
+                   this.gravity.scaleToRef(this._scaledUpdateSpeed, this._scaledGravity);
+                   particle.direction.addInPlace(this._scaledGravity);
+               }
+           }
+       }
+
+// Start the particle system
+particleSystem.start();
+
+
+
+
+// Scrolltrigger
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+
+
+
+ScrollTrigger.defaults({
+
+ 
+ immediateRender: false,
+ ease: "power1.inOut",
+});
+
+
+
+let car_anim_tl = gsap.timeline({
+
+   scrollTrigger: {
+ trigger: ".section-two",
+   //  trigger: "body",
+     start: "top top", 
+     endTrigger: ".section-five",
+     end: "bottom bottom", 
+     scrub: 1, 
+  }
+ 
+});
+
+// start of timeline   
+car_anim_tl
+ .to(ground.rotation, { y: 6.5 }, "simultaneously") 
+ .to(ground.position, { z: 30 }, "simultaneously")   
+
+// end of timeline
+
+gsap.to(".section3Text1", {
+ scrollTrigger:{
+   trigger: ".section-three",
+   start: "top bottom", 
+   end: "bottom top", 
+   scrub: 1,
+   markers: false
+ },
+ x: 0, opacity: 1, color: "white", backgroundColor: "black"
+
+})	
+
+
+
+var defaultPipeline = new BABYLON.DefaultRenderingPipeline(
+   "DefaultRenderingPipeline",
+   true, // is HDR?
+   scene,
+   //scene.cameras
+   [camera]
+);
+
+if (defaultPipeline.isSupported) {
+
+   /* imageProcessing */
+   defaultPipeline.imageProcessingEnabled = false; //true by default
+  if (defaultPipeline.imageProcessingEnabled) {
+
+       defaultPipeline.imageProcessing.contrast = 1; // 1 by default
+       defaultPipeline.imageProcessing.exposure = 1; // 1 by default
+       // color grading
+       defaultPipeline.imageProcessing.colorGradingEnabled = false; // false by default
+       if (defaultPipeline.imageProcessing.colorGradingEnabled) {
+           // using .3dl (best) :
+           defaultPipeline.imageProcessing.colorGradingTexture = new BABYLON.ColorGradingTexture("Textures/LateSunset.3dl", scene);
+       }
+   }    
+
+   /* chromatic abberation */
+   defaultPipeline.chromaticAberrationEnabled = false; // false by default
+   if (defaultPipeline.chromaticAberrationEnabled) {
+       defaultPipeline.chromaticAberration.aberrationAmount = 3; // 30 by default
+       defaultPipeline.chromaticAberration.radialIntensity = 0.5; // 30 by default
+       defaultPipeline.chromaticAberration.adaptScaleToCurrentViewport = false; // false by default
+       defaultPipeline.chromaticAberration.alphaMode = 0; // 0 by default
+       defaultPipeline.chromaticAberration.alwaysForcePOT = false; // false by default
+       defaultPipeline.chromaticAberration.enablePixelPerfectMode = false; // false by default
+       defaultPipeline.chromaticAberration.forceFullscreenViewport = true; // true by default
+   }
+   
+   /* DOF */
+   defaultPipeline.depthOfFieldEnabled = false // false by default
+   if (defaultPipeline.depthOfFieldEnabled && defaultPipeline.depthOfField.isSupported) {
+       defaultPipeline.depthOfFieldBlurLevel = 2; // 0 by default
+       defaultPipeline.depthOfField.fStop = 3.8; // 1.4 by default
+       defaultPipeline.depthOfField.focalLength = 50; // 50 by default, mm
+       defaultPipeline.depthOfField.focusDistance = 2000; // 2000 by default, mm
+       defaultPipeline.depthOfField.lensSize = 50; // 50 by default
+   }
+   /* FXAA */
+   defaultPipeline.fxaaEnabled = false; // false by default
+   if (defaultPipeline.fxaaEnabled) {
+       defaultPipeline.fxaa.samples = 4; // 1 by default
+       defaultPipeline.fxaa.adaptScaleToCurrentViewport = false; // false by default
+   }
+   /* glowLayer */
+   defaultPipeline.glowLayerEnabled = true;
+   if (defaultPipeline.glowLayerEnabled) {
+       defaultPipeline.glowLayer.blurKernelSize = 16; // 16 by default
+       defaultPipeline.glowLayer.intensity = 1; // 1 by default
+   }
+   /* grain */
+   defaultPipeline.grainEnabled = true;
+   if (defaultPipeline.grainEnabled) {
+       defaultPipeline.grain.adaptScaleToCurrentViewport = true; // false by default
+       defaultPipeline.grain.animated = true; // false by default
+       defaultPipeline.grain.intensity = 80; // 30 by default
+   }
+   /* MSAA */
+   defaultPipeline.samples = 1; // 1 by default
+   defaultPipeline.sharpenEnabled = false;
+   if (defaultPipeline.sharpenEnabled) {
+       defaultPipeline.sharpen.adaptScaleToCurrentViewport = false; // false by default
+       defaultPipeline.sharpen.edgeAmount = 0.3; // 0.3 by default
+       defaultPipeline.sharpen.colorAmount = 1; // 1 by default
+   }
+}  
+
+
+return scene;
+}
+           window.initFunction = async function() {
+               
+               
+               var asyncEngineCreation = async function() {
+                   try {
+                   return createDefaultEngine();
+                   } catch(e) {
+                   console.log("the available createEngine function failed. Creating the default engine instead");
+                   return createDefaultEngine();
+                   }
+               }
+
+               window.engine = await asyncEngineCreation();
+   if (!engine) throw 'engine should not be null.';
+   startRenderLoop(engine, canvas);
+   window.scene = createScene();};
+   initFunction().then(() => {sceneToRender = scene                    
+   });
+
+   // Resize
+   window.addEventListener("resize", function () {
+       engine.resize();
+   });
+
+
+</script>    
+        
+</body>
+
+</html>
