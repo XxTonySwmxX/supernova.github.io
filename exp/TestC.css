@@ -1,9 +1,10 @@
  .u-section-1 {
-  background-image: none;
+  background-image: url("images/darkred6.png");
+  background-position: 50% 50%;
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 873px;
+  min-height: 892px;
 }
 
 .u-section-1 .u-video-1 {
@@ -161,7 +162,7 @@
   font-size: 1.5rem;
   font-style: italic;
   font-weight: normal;
-  margin: 30px 682px 60px 0;
+  margin: 29px 682px 60px 0;
 }
 
 @media (max-width: 1199px) {

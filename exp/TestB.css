@@ -1,5 +1,6 @@
  .u-section-1 {
-  background-image: none;
+  background-image: url("images/darkred6.png");
+  background-position: 50% 50%;
 }
 
 .u-section-1 .u-sheet-1 {
@@ -83,7 +84,7 @@
   font-size: 0.875rem;
   text-transform: uppercase;
   font-weight: 700;
-  margin: 17px 0 0;
+  margin: 17px 2px 0 -2px;
 }
 
 .u-section-1 .u-icon-4 {

@@ -1,5 +1,6 @@
  .u-section-1 {
-  background-image: none;
+  background-image: url("images/darkred6.png");
+  background-position: 50% 50%;
 }
 
 .u-section-1 .u-sheet-1 {
@@ -189,7 +190,7 @@
   font-size: 1.5rem;
   font-style: italic;
   font-weight: normal;
-  margin: 24px 682px 60px 0;
+  margin: 23px 682px 60px 0;
 }
 
 @media (max-width: 1199px) {
