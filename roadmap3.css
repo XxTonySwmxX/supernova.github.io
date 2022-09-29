@@ -52,14 +52,17 @@
 
 .u-section-1 .u-icon-1 {
   height: 44px;
+  color: rgb(59, 89, 152) !important;
 }
 
 .u-section-1 .u-icon-2 {
   height: 44px;
+  color: rgb(85, 172, 238) !important;
 }
 
 .u-section-1 .u-icon-3 {
   height: 44px;
+  color: rgb(197, 54, 164) !important;
 }
 
 .u-section-1 .u-btn-1 {
@@ -115,18 +118,6 @@
   .u-section-1 .u-social-icons-1 {
     margin-top: -431px;
     margin-right: 29px;
-  }
-
-  .u-section-1 .u-icon-1 {
-    color: rgb(59, 89, 152) !important;
-  }
-
-  .u-section-1 .u-icon-2 {
-    color: rgb(85, 172, 238) !important;
-  }
-
-  .u-section-1 .u-icon-3 {
-    color: rgb(197, 54, 164) !important;
   }
 
   .u-section-1 .u-btn-1 {
