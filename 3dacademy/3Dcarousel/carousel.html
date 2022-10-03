@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>3D Carousel</title>
+
+        <!-- Babylon.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+
+
+  <script src='https://assets.codepen.io/16327/gsap-latest-beta.min.js'></script>
+<script src='https://assets.codepen.io/16327/ScrollTrigger.min.js'></script>        
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+            
+            #CarouselInfo {
+            position: absolute;
+            left: 0px;
+            top: 20%;
+            font-size: 20px;
+            color: white!important;
+            text-shadow: 2px 2px 2px black;    
+            z-index: 99999!important;
+            
+            }
+            
+            #CarouselInfo a{
+            color: white;
+            text-decoration: none!important;
+            border: 1px solid white;
+            }
+            
+        </style>
+    </head>
+<body>
+    
+<script>
+	
+(function () {
+  let previousTime = Date.now();
+  let frames = 0;
+  let refreshRate = 1000;
+
+  let fpsMeter = document.createElement("div");
+  fpsMeter.id = "fpsMeter";
+  document.body.appendChild(fpsMeter);
+
+  requestAnimationFrame(function loop() {
+    const TIME = Date.now();
+    frames++;
+    if (TIME > previousTime + refreshRate) {
+      let fps = Math.round((frames * refreshRate) / (TIME - previousTime));
+      previousTime = TIME;
+      frames = 0;
+      fpsMeter.innerHTML = "FPS: " + fps * (1000 / refreshRate);
+    }
+    requestAnimationFrame(loop);
+  });
+
+  fpsMeter.style.position = "fixed";
+  fpsMeter.style.top = "0px";
+  fpsMeter.style.right = "45px";
+  fpsMeter.style.background = "rgba(0, 0, 0, 0.5)";
+  fpsMeter.style.padding = "10px";
+  fpsMeter.style.color = "rgba(255, 255, 255, 0.75)";
+  fpsMeter.style.fontFamily = "Monospace";
+  fpsMeter.style.fontSize = "24px";
+  fpsMeter.style.zIndex = "10000";
+})();
+  
+	 
+</script>        
+    
+    <canvas id="renderCanvas"></canvas>
+    
+<div id="CarouselInfo">
+ 
+<div id="content1">
+<h1> Edverse Demo </h1>  <br> <a href="https://mbytedeveloping.com/1Galaxy/" target="blank">Enter this project</a>    
+</div>    
+ 
+<div id="content2">
+<h1> Art gallery </h1>  <br> <a href="https://mbytedeveloping.com/Customers/GoldenLeafWorld/schoolGallery/Gallery.php?read=17" target="blank">Enter this project</a>    
+</div>
+
+<div id="content3">
+<h1> Matrix Effect </h1>  <br> <a href="https://mbytedeveloping.com/Projects/Babylon/0HomePageRemake/" target="blank">Enter this project</a>  
+</div>
+    
+<div id="content4">
+<h1> Lego Editor </h1>  <br> <a href="https://mbytedeveloping.com/Projects/Babylon/BuildLego/" target="blank">Enter this project</a>   
+</div>    
+    
+</div>    
+    
+    <script>
+    
+var video1 = "galaxyShort.mp4";    
+var video2 = "ArtGallery.webm"; 
+var video3 = "matrixShort.mp4"; 
+var video4 = "LegoEditor.webm"; 
+    
+        var canvas = document.getElementById("renderCanvas");
+
+        var startRenderLoop = function (engine, canvas) {
+            engine.runRenderLoop(function () {
+                if (sceneToRender && sceneToRender.activeCamera) {
+                    sceneToRender.render();
+                }
+            });
+        }
+
+        var engine = null;
+        var scene = null;
+        var sceneToRender = null;
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        
+        
+var currentMesh = null;
+var startingPoint = null;
+
+const getGroundPosition = function (scene) {
+  // Use a predicate to get position on the ground
+  const pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh.name === 'floor' });
+
+  if (pickinfo.hit) {
+    return pickinfo.pickedPoint;
+  }
+
+  return null;
+};        
+        
+        
+        const createScene =  () => {
+    const scene = new BABYLON.Scene(engine);
+
+    //const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 3, new BABYLON.Vector3(0, 0, 0));
+
+
+    var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI / -2, Math.PI / 2.5, 1, new BABYLON.Vector3(0, 0, 0)); // -Math.PI / 2, Math.PI / 2.5, 3
+   
+ camera.lowerBetaLimit = 1.2;
+camera.upperBetaLimit = 1.2;   
+   
+    
+    //camera.lowerRadiusLimit = 1;
+    //camera.upperRadiusLimit = 1;    
+
+
+
+    //const box = BABYLON.MeshBuilder.CreateBox("box", {height: 0.1, width: 0.1, depth: 0.1 });
+    //box.isVisible = false
+    //box.position.y = 0
+    //box.position.x = 1
+    //box.position.z = -2
+    //box.isVisible = false
+    //camera.lockedTarget = box;
+
+	//var camera = new BABYLON.ArcRotateCamera("camera1", -Math.PI / 2, Math.PI / 2.2, 0.0001, new BABYLON.Vector3(0, 0, 0), scene);
+    camera.attachControl(canvas, true);
+    camera.detachControl(canvas);
+
+
+    var root = new BABYLON.TransformNode("root", scene);
+    root.isVisible = false
+    
+    root.position.y = 1; //1
+    root.position.z = -2.45; //-4
+    root.position.x = 0; //1
+    camera.parent = root;
+
+
+const player = BABYLON.MeshBuilder.CreateBox("box", {height: 0.1, width: 0.1, depth: 0.1 });
+player.parent = root
+player.isVisible = false 
+
+    const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0));
+    light.intensity = 0.7;
+    
+// Glowing effect on diffuse materials
+var gl = new BABYLON.GlowLayer("glow", scene, { mainTextureSamples: 4 });     
+  
+  var defaultPipeline = new BABYLON.DefaultRenderingPipeline(
+        "DefaultRenderingPipeline",
+        true, // is HDR?
+        scene,
+        //scene.cameras
+        [camera]
+    );
+
+    if (defaultPipeline.isSupported) {
+
+        /* imageProcessing */
+        defaultPipeline.imageProcessingEnabled = true; //true by default
+       if (defaultPipeline.imageProcessingEnabled) {
+
+            defaultPipeline.imageProcessing.contrast = 1; // 1 by default
+            defaultPipeline.imageProcessing.exposure = 1; // 1 by default
+            // color grading
+            defaultPipeline.imageProcessing.colorGradingEnabled = false; // false by default
+            if (defaultPipeline.imageProcessing.colorGradingEnabled) {
+                // using .3dl (best) :
+                defaultPipeline.imageProcessing.colorGradingTexture = new BABYLON.ColorGradingTexture("Textures/LateSunset.3dl", scene);
+            }
+        }    
+
+        /* chromatic abberation */
+        defaultPipeline.chromaticAberrationEnabled = false; // false by default
+        if (defaultPipeline.chromaticAberrationEnabled) {
+            defaultPipeline.chromaticAberration.aberrationAmount = 3; // 30 by default
+            defaultPipeline.chromaticAberration.radialIntensity = 0.5; // 30 by default
+            defaultPipeline.chromaticAberration.adaptScaleToCurrentViewport = false; // false by default
+            defaultPipeline.chromaticAberration.alphaMode = 0; // 0 by default
+            defaultPipeline.chromaticAberration.alwaysForcePOT = false; // false by default
+            defaultPipeline.chromaticAberration.enablePixelPerfectMode = false; // false by default
+            defaultPipeline.chromaticAberration.forceFullscreenViewport = true; // true by default
+        }
+        
+        /* DOF */
+        defaultPipeline.depthOfFieldEnabled = true // false by default
+        if (defaultPipeline.depthOfFieldEnabled && defaultPipeline.depthOfField.isSupported) {
+            defaultPipeline.depthOfFieldBlurLevel = 0; // 0 by default
+            defaultPipeline.depthOfField.fStop = 4; // 1.4 by default
+            defaultPipeline.depthOfField.focalLength = 50; // 50 by default, mm
+            defaultPipeline.depthOfField.focusDistance = 2000; // 2000 by default, mm
+            defaultPipeline.depthOfField.lensSize = 50; // 50 by default
+        }
+        /* FXAA */
+        defaultPipeline.fxaaEnabled = true; // false by default
+        if (defaultPipeline.fxaaEnabled) {
+            defaultPipeline.fxaa.samples = 1; // 1 by default
+            defaultPipeline.fxaa.adaptScaleToCurrentViewport = false; // false by default
+        }
+        /* glowLayer */
+        defaultPipeline.glowLayerEnabled = true;
+        if (defaultPipeline.glowLayerEnabled) {
+            defaultPipeline.glowLayer.blurKernelSize = 13; // 16 by default
+            defaultPipeline.glowLayer.intensity = 0.22; // 1 by default
+        }
+        /* grain */
+        defaultPipeline.grainEnabled = true;
+        if (defaultPipeline.grainEnabled) {
+            defaultPipeline.grain.adaptScaleToCurrentViewport = false; // false by default
+            defaultPipeline.grain.animated = true; // false by default
+            defaultPipeline.grain.intensity = 10; // 30 by default
+        }
+        /* MSAA */
+        defaultPipeline.samples = 16; // 1 by default
+        defaultPipeline.sharpenEnabled = true;
+        if (defaultPipeline.sharpenEnabled) {
+            defaultPipeline.sharpen.adaptScaleToCurrentViewport = true; // false by default
+            defaultPipeline.sharpen.edgeAmount = 1; // 0.3 by default
+            defaultPipeline.sharpen.colorAmount = 1; // 1 by default
+        }
+    }  
+    
+    
+
+    // Create the SSR post-process!
+    var ssr = new BABYLON.ScreenSpaceReflectionPostProcess("ssr", scene, 1.0, camera);
+    ssr.reflectionSamples = 100; // quality.
+    ssr.strength = 100; // Set default strength of reflections.
+    ssr.reflectionSpecularFalloffExponent = 0.1; // Attenuate the reflections a little bit. (typically in interval [1, 3])
+    //ssr.reflectionSpecularFalloffExponent = 4;
+  
+
+
+
+
+    var mirror = BABYLON.Mesh.CreateBox("mirror", 1.0, scene);
+    mirror.scaling = new BABYLON.Vector3(100.0, 0.01, 100.0);
+   
+    //var mirror = BABYLON.Mesh.CreatePlane("mirror", 100.0, scene);
+   //mirror.rotation.x = Math.PI / 2
+   //mirror.physicsImpostor = new BABYLON.PhysicsImpostor(mirror, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0 }, scene); 
+    
+    //mirror.material = new BABYLON.PBRMaterial("mirror", scene);
+    mirror.material = new BABYLON.StandardMaterial("mirror", scene);
+    mirror.material.reflectionTexture = new BABYLON.MirrorTexture("mirror", 2048, /*{ratio: 0.5}, 2048,*/ scene, true);
+    mirror.material.reflectionTexture.mirrorPlane = new BABYLON.Plane(0, -2, 0, -1); // 0, -1.0, 0, -2.0
+    //mirror.material.reflectionTexture.renderList = [ box, ];
+    mirror.material.reflectionTexture.renderList.push(  );
+    mirror.material.reflectionTexture.level = 1; // 0.8
+    mirror.material.reflectionTexture.adaptiveBlurKernel = 10;
+
+    //mirror.material.metallicTexture = new BABYLON.Texture("textures/Venator_Floor_baseColor.png", scene); // metal
+    mirror.material.diffuseTexture = new BABYLON.Texture("Tiles_011_COLOR.jpg", scene); // basecolor
+    mirror.material.bumpTexture = new BABYLON.Texture("Tiles_011_NORM.jpg", scene);   // normal
+    
+           mirror.material.bumpTexture.uScale = 50;
+           mirror.material.bumpTexture.vScale = 50;
+              
+           mirror.material.diffuseTexture.uScale = 50;
+           mirror.material.diffuseTexture.vScale = 50;  
+           
+    //mirror.material.metallicTexture.uScale = 50;
+    //mirror.material.metallicTexture.vScale = 50;           
+
+//mirror.material.useRGBColor = false;
+//mirror.material.primaryColor = BABYLON.Color3.Magenta();
+  
+    mirror.material.specularTexture = new BABYLON.Texture("reflectivity.png", scene);
+    mirror.material.specularTexture.uScale = 50;
+    mirror.material.specularTexture.vScale = 50;  
+    
+    mirror.position = new BABYLON.Vector3(0, -1.5, 0);   
+ //mirror.isVisible = false 
+ 
+//floor
+//const floor1 = BABYLON.MeshBuilder.CreateBox("box", {height: 0.1, width: 100, depth: 100 });
+//floor1.position.y = -1
+ 
+ 
+  
+// 3D carousel  
+ var material = new BABYLON.StandardMaterial("material", scene);
+material.diffuseColor = new BABYLON.Color3(0.71, 0.7, 0.7);  // 0, 0, 0 
+  
+  //const cylinder = BABYLON.MeshBuilder.CreateCylinder("cyl", { arc: 1, height: 0.6, diameter: 1.99, tessellation: 50 }); 
+  //cylinder.position.x = 0
+  //cylinder.position.y = 0
+  //cylinder.material = material;	
+
+var floor = new BABYLON.MeshBuilder.CreateGround('floor', {
+        width: 20,
+        height: 20,
+    })
+floor.isVisible = false    
+
+var material_stairs = new BABYLON.StandardMaterial('stairsmat', scene);
+	material_stairs.diffuseColor = new BABYLON.Color3(0.71, 0.7, 0.7);
+	material_stairs.alpha = 0.0001;
+
+   const cylinder = new BABYLON.MeshBuilder.CreateCylinder('noname',{ arc: 1, height: 0.65, diameter: 2.1, tessellation: 50 } )
+    cylinder.material = material_stairs;
+    	
+    const cylinder2 = new BABYLON.MeshBuilder.CreateCylinder('noname',{ arc: 1, height: 0.6, diameter: 1.99, tessellation: 50 } )
+    
+cylinder2.material = material;
+cylinder2.parent = cylinder
+//mirror.material.reflectionTexture.renderList.push( cylinder2);
+
+
+BoxTrigger1 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.5 , diameter: 2.5 });
+BoxTrigger1.parent = cylinder
+BoxTrigger1.position.z = 0
+var PIBoxTrigger1= Math.PI / 0.1;
+BoxTrigger1.rotation = new BABYLON.Vector3(0, PIBoxTrigger1, 0);
+BoxTrigger1.material = material_stairs;
+
+
+BoxTrigger2 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.5 , diameter: 2.5 });
+BoxTrigger2.parent = cylinder
+BoxTrigger2.position.z = 0
+var PIBoxTrigger2 = Math.PI / 2.5;
+BoxTrigger2.rotation = new BABYLON.Vector3(0, PIBoxTrigger2, 0);
+BoxTrigger2.material = material_stairs;
+
+
+BoxTrigger3 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.5 , diameter: 2.5 });
+BoxTrigger3.parent = cylinder
+BoxTrigger3.position.z = 0
+var PIBoxTrigger3 = Math.PI / -2.5;
+BoxTrigger3.rotation = new BABYLON.Vector3(0, PIBoxTrigger3, 0);
+BoxTrigger3.material = material_stairs;
+
+BoxTrigger4 = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.5 , diameter: 2.5 });
+BoxTrigger4.parent = cylinder
+BoxTrigger4.position.z = 0
+var PIBoxTrigger4 = Math.PI / 1.25;
+BoxTrigger4.rotation = new BABYLON.Vector3(0, PIBoxTrigger4, 0);
+BoxTrigger4.material = material_stairs;
+
+
+
+//CarouselContents
+var CarouselInfo = document.getElementById('CarouselInfo');
+var content1 = document.getElementById('content1');
+var content2 = document.getElementById('content2');
+var content3 = document.getElementById('content3');
+var content4 = document.getElementById('content4');
+content1.style.display = "none";
+content2.style.display = "none";
+content3.style.display = "none";
+content4.style.display = "none";
+
+
+// Check triggers
+scene.registerBeforeRender(() => {
+ 
+if (player.intersectsMesh(BoxTrigger1, false)) {
+
+	//CarouselInfo.innerHTML = `  `; 
+	CarouselInfo.style.display = "";
+	content1.style.display = "";
+    content2.style.display = "none";
+    content3.style.display = "none";
+    content4.style.display = "none";
+    scene.clearColor = new BABYLON.Color3(0, 0, 0);  
+
+}
+else if (player.intersectsMesh(BoxTrigger2, false)) {
+
+	//CarouselInfo.innerHTML = `  `; 
+	CarouselInfo.style.display = "";
+	content1.style.display = "none";
+    content2.style.display = "";
+    content3.style.display = "none";
+    content4.style.display = "none";	
+    scene.clearColor = new BABYLON.Color3(0.2, 0.09, 0.78, 0.84);
+
+}
+else if (player.intersectsMesh(BoxTrigger3, false)) {
+
+	//CarouselInfo.innerHTML = `  `; 
+	CarouselInfo.style.display = "";
+	content1.style.display = "none";
+    content2.style.display = "none";
+    content3.style.display = "";
+    content4.style.display = "none";	
+    scene.clearColor = new BABYLON.Color3(0.45, 0.77, 0.67, 0.73);  
+
+}
+else if (player.intersectsMesh(BoxTrigger4, false)) {
+
+	//CarouselInfo.innerHTML = `  `; 
+	CarouselInfo.style.display = "";
+	content1.style.display = "none";
+    content2.style.display = "none";
+    content3.style.display = "none";
+    content4.style.display = "";	
+    scene.clearColor = new BABYLON.Color3(1, 0, 0);  
+
+}
+else {
+
+     
+	//CarouselInfo.innerHTML = ` `; 
+	CarouselInfo.style.display = "none"; 
+    scene.clearColor = new BABYLON.Color3(0.61, 0.6, 0.6);      
+    
+}
+
+});
+
+
+				var currentPosition = { x: 0, y: 0 };
+				var clicked = false;
+				canvas.addEventListener("pointerdown", function (evt) {
+					currentPosition.x = evt.clientX;
+					currentPosition.y = evt.clientY;
+					clicked = true;
+				});
+				
+				canvas.addEventListener("pointermove", function (evt) {
+					if (!clicked) {
+						return;
+					}
+
+                    var dx = evt.clientX - currentPosition.x;
+                    var dy = evt.clientY - currentPosition.y;
+
+                    var angleX = dy * 0.003;
+                    var angleY = dx * 0.003;
+
+					cylinder.rotation.y -= angleY;
+					//cylinder.rotation.x -= angleX;
+
+                    currentPosition.x = evt.clientX;
+                   // currentPosition.y = evt.clientY;
+				});
+				
+				canvas.addEventListener("pointerup", function (evt) {
+					clicked = false;
+				});
+
+
+
+ function moveCylinder(){
+     
+   cylinder.actionManager = new BABYLON.ActionManager(scene);
+
+    cylinder.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(
+        BABYLON.ActionManager.OnLeftPickTrigger,
+        ({ source }) => {
+          currentMesh = source;
+          camera.detachControl(canvas);
+          startingPoint = getGroundPosition(scene);
+        }
+      )
+    );
+
+    scene.onPointerObservable.add((pointerInfo) => {
+      switch (pointerInfo.type) {
+        case BABYLON.PointerEventTypes.POINTERUP: {
+           // camera.attachControl(canvas, true);
+
+            if (startingPoint) {
+                startingPoint = null;
+
+                return;
+            }
+
+            break;
+        }
+
+        case BABYLON.PointerEventTypes.POINTERMOVE: {
+            // console.log(scene.pointerX, scene.pointerY);
+            if (!startingPoint) {
+                return;
+            }
+
+            const current = getGroundPosition(scene);
+
+            if (!current) {
+                return;
+            }
+
+            const dir2 = new BABYLON.Vector2(current.x, current.z).normalize();
+            //currentMesh.rotation.y = Math.atan2(dir2.x, dir2.y);
+            currentMesh.rotation.y = Math.atan2(dir2.x, dir2.y);
+
+            startingPoint = current;
+
+            break;
+        }
+      }
+    });
+     
+     
+ }
+
+
+
+
+
+/*
+
+const cylinder2 = BABYLON.MeshBuilder.CreateCylinder("cyl", { height: 0.4, diameter: 1 });
+  cylinder2.position.x = 0
+  cylinder2.position.y = 0
+
+ var cylinderCSG = BABYLON.CSG.FromMesh(cylinder2);  
+ var boxCSG = BABYLON.CSG.FromMesh(cylinder);  
+ 
+    var subCSG = boxCSG.subtract(cylinderCSG);
+
+      var resultMesh = subCSG.toMesh("csg", null, scene);
+    resultMesh.position = new BABYLON.Vector3(0, 5, 0);  
+
+cylinder.isVisible = false
+cylinder2.isVisible = false
+
+
+	cylinder.actionManager = new BABYLON.ActionManager(scene);
+	cylinder.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+		console.log('object clicked');
+        
+	}));  
+
+*/
+
+  
+    
+
+
+// Camera movement
+
+
+    var makeLine = function(start, finish) { 
+        var direction = finish.subtract(start).normalize();
+        var end = finish.clone();
+        end.x -=direction.x * 1;
+        end.z -=direction.z * 1.2;
+        end.y = 0; //0
+        BABYLON.Animation.CreateAndStartAnimation('cam', root, 'position', 30, 120, start, end, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+    }
+
+    scene.onPointerDown = function (evt, pickResult) {
+        if (pickResult.hit && pickResult.pickedMesh.name !== "mirror") {
+             makeLine(root.position, pickResult.pickedMesh.position, 2);
+            console.log(pickResult.pickedMesh.position)
+        }
+    }
+
+
+function moveCam(){
+
+  
+    
+}
+moveCam()
+
+
+//scene.useRightHandedSystem = true  
+
+// Videos
+
+function screen1(){
+    
+// Video screen
+//let screen = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+var screen = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.59 , diameter: 2 });
+
+screen.scaling = new BABYLON.Vector3(1, 1, 1);
+screen.position = new BABYLON.Vector3(0, 0, 0);
+var PIscreen = Math.PI / 0.1;
+screen.rotation = new BABYLON.Vector3(0, PIscreen, 0);
+screen.parent = cylinder //resultMesh
+
+	var planeOpts = {
+	sideOrientation: BABYLON.Mesh.DOUBLESIDE
+	};
+//	var ANote0Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+//	var vidPos = (new BABYLON.Vector3(34.9, 12, 0))
+	var vidPos = (new BABYLON.Vector3(0, 0, 0))
+	
+RotationYV = Math.PI / -2;  
+	
+    screen.position = vidPos;
+	var ANote0VideoMat = new BABYLON.StandardMaterial("m", scene);
+	var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex", video1 , scene);
+	ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+	ANote0VideoMat.roughness = 1;
+//	ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
+	screen.material = ANote0VideoMat;    
+
+//mirror.material.reflectionTexture.renderList.push( screen );
+ 
+	screen.actionManager = new BABYLON.ActionManager(scene);
+	screen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	
+	//window.open('https://mbytedeveloping.com/1Galaxy/', '_blank');
+	CarouselInfo.innerHTML = ` <h1> Edverse Demo </h1>  <br> <a href="https://mbytedeveloping.com/1Galaxy/" target="blank">Enter this project</a> `; 
+    scene.clearColor = new BABYLON.Color3(0, 0, 0);  
+      
+        
+	}));  
+ 
+    
+}
+screen1()
+
+function screen2(){
+
+// Video screen
+//let screen = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+var screen = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.59 , diameter: 2 });
+
+screen.scaling = new BABYLON.Vector3(1, 1, 1);
+screen.position = new BABYLON.Vector3(0, 0, 0);
+var PIscreen2 = Math.PI / 2.5;
+screen.rotation = new BABYLON.Vector3(0, PIscreen2, 0);
+screen.parent = cylinder //resultMesh
+
+	var planeOpts = {
+	sideOrientation: BABYLON.Mesh.DOUBLESIDE
+	};
+//	var ANote0Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+//	var vidPos = (new BABYLON.Vector3(34.9, 12, 0))
+	var vidPos = (new BABYLON.Vector3(0, 0, 0))
+	
+RotationYV = Math.PI / 2;  
+	
+    screen.position = vidPos;
+	var ANote0VideoMat = new BABYLON.StandardMaterial("m", scene);
+	var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex", video2, scene);
+	ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+	ANote0VideoMat.roughness = 1;
+//	ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
+	screen.material = ANote0VideoMat;    
+ 
+//mirror.material.reflectionTexture.renderList.push( screen );
+ 
+	screen.actionManager = new BABYLON.ActionManager(scene);
+	screen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	
+	//window.open('https://mbytedeveloping.com/1Galaxy/', '_blank');
+	CarouselInfo.innerHTML = ` <h1> Art gallery </h1>  <br> <a href="https://mbytedeveloping.com/Customers/GoldenLeafWorld/schoolGallery/Gallery.php?read=17" target="blank">Enter this project</a> `; 
+    scene.clearColor = new BABYLON.Color3(0.2, 0.09, 0.78, 0.84);  
+      
+        
+	}));   
+ 
+    
+}
+screen2()
+
+
+function screen3(){
+
+// Video screen
+//let screen = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+var screen = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.59 , diameter: 2 });
+
+screen.scaling = new BABYLON.Vector3(1, 1, 1);
+screen.position = new BABYLON.Vector3(0, 0, 0);
+var PIscreen2 = Math.PI / -2.5;
+screen.rotation = new BABYLON.Vector3(0, PIscreen2, 0);
+screen.parent = cylinder //resultMesh
+
+	var planeOpts = {
+	sideOrientation: BABYLON.Mesh.DOUBLESIDE
+	};
+//	var ANote0Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+//	var vidPos = (new BABYLON.Vector3(34.9, 12, 0))
+	var vidPos = (new BABYLON.Vector3(0, 0, 0))
+	
+RotationYV = Math.PI / 2;  
+	
+    screen.position = vidPos;
+	var ANote0VideoMat = new BABYLON.StandardMaterial("m", scene);
+	var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex",  video3, scene);
+	ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+	ANote0VideoMat.roughness = 1;
+//	ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
+	screen.material = ANote0VideoMat;    
+
+//mirror.material.reflectionTexture.renderList.push( screen );
+
+	screen.actionManager = new BABYLON.ActionManager(scene);
+	screen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	
+	//window.open('https://mbytedeveloping.com/1Galaxy/', '_blank');
+	CarouselInfo.innerHTML = ` <h1> Matrix Effect </h1>  <br> <a href="https://mbytedeveloping.com/Projects/Babylon/0HomePageRemake/" target="blank">Enter this project</a> `; 
+    scene.clearColor = new BABYLON.Color3(0.45, 0.77, 0.67, 0.73);  
+      
+        
+	}));  
+
+    
+}
+screen3()
+
+
+function screen4(){
+
+// Video screen
+//let screen = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+var screen = BABYLON.MeshBuilder.CreateCylinder("cylinder", {arc: 0.2, enclose: true, height: 0.59 , diameter: 2 });
+
+screen.scaling = new BABYLON.Vector3(1, 1, 1);
+screen.position = new BABYLON.Vector3(0, 0, 0);
+var PIscreen4 = Math.PI / 1.25;
+screen.rotation = new BABYLON.Vector3(0, PIscreen4, 0);
+screen.parent = cylinder //resultMesh
+
+	var planeOpts = {
+	sideOrientation: BABYLON.Mesh.DOUBLESIDE
+	};
+//	var ANote0Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, scene);
+//	var vidPos = (new BABYLON.Vector3(34.9, 12, 0))
+	var vidPos = (new BABYLON.Vector3(0, 0, 0))
+	
+RotationYV = Math.PI / 2;  
+	
+    screen.position = vidPos;
+	var ANote0VideoMat = new BABYLON.StandardMaterial("m", scene);
+	var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex", video4, scene);
+	ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+	ANote0VideoMat.roughness = 1;
+//	ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
+	screen.material = ANote0VideoMat;    
+
+//mirror.material.reflectionTexture.renderList.push( screen );
+
+	screen.actionManager = new BABYLON.ActionManager(scene);
+	screen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickUpTrigger, function () {
+	
+	//window.open('https://mbytedeveloping.com/1Galaxy/', '_blank');
+	CarouselInfo.innerHTML = ` <h1> Matrix Effect </h1>  <br> <a href="https://mbytedeveloping.com/Projects/Babylon/0HomePageRemake/" target="blank">Enter this project</a> `; 
+    scene.clearColor = new BABYLON.Color3(0.45, 0.77, 0.67, 0.73);  
+      
+        
+	}));  
+
+//screen.useRightHandedSystem = true 
+    
+}
+screen4()
+
+
+
+    return scene;
+}
+                window.initFunction = async function() {
+                    
+                    
+                    var asyncEngineCreation = async function() {
+                        try {
+                        return createDefaultEngine();
+                        } catch(e) {
+                        console.log("the available createEngine function failed. Creating the default engine instead");
+                        return createDefaultEngine();
+                        }
+                    }
+
+                    window.engine = await asyncEngineCreation();
+        if (!engine) throw 'engine should not be null.';
+        startRenderLoop(engine, canvas);
+        window.scene = createScene();};
+        initFunction().then(() => {sceneToRender = scene                    
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+
+</body>
+</html>
