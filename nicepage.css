@@ -1710,7 +1710,7 @@ a {
   flex-shrink: 1;
   min-width: 0px;
 }
-.u-label-none:not(.u-form-agree) label {
+.u-label-none:not(.u-form-agree):not(.u-form-checkbox):not(.u-form-checkbox-group):not(.u-form-radiobutton) label {
   display: none !important;
 }
 .u-form-horizontal .input-group {
@@ -2056,6 +2056,10 @@ a {
 .u-form-file-upload .u-file-max {
   flex-basis: 100%;
   margin-top: 0.5em;
+  margin-bottom: 0;
+}
+.u-form-text .u-text {
+  margin-top: 0;
   margin-bottom: 0;
 }
 *,
@@ -5953,11 +5957,8 @@ ul.u-text li:last-child {
   content: '';
   display: inline-block;
   vertical-align: middle;
-  margin-left: 6px;
-  border-top: 0.2em solid;
-  border-right: 0.2em solid transparent;
-  border-bottom: 0;
-  border-left: 0.2em solid transparent;
+  height: 1em;
+  width: 1.5em;
 }
 .u-image,
 .u-background-effect-image,
@@ -16227,6 +16228,7 @@ html {
 .u-body {
   font-size: 1rem;
   line-height: 1.6;
+  
 }
 .u-body h1,
 .u-body h2,
@@ -19963,8 +19965,11 @@ a.pswp__share--download:hover {
   overflow-y: hidden;
   scrollbar-width: none;
 }
+
+
 .u-layout-horizontal .u-repeater::-webkit-scrollbar,
 .u-layout-horizontal .u-gallery-inner::-webkit-scrollbar {
+  
   display: none;
 }
 .u-layout-horizontal .u-gallery-inner {
@@ -38024,7 +38029,7 @@ a.u-link.u-text-hover-grey-90:hover {
 
         .u-button-style.u-border-custom-color-4
         {
-            border-color: #ffffff  !important;
+            border-color: #d9d9d9  !important;
             color: #930001 !important;
             background-color: transparent !important;
         }
@@ -38913,7 +38918,9 @@ a.u-link.u-text-hover-grey-90:hover {
 
   .u-header .u-social-icons-1 {
     width: 158px;
-    margin-bottom: 48px;
+    margin-top: -32px;
+    margin-right: calc(((100% - 940px) / 2) + 135px);
+    margin-bottom: 49px;
   }
 }
 @media (max-width: 991px) {
@@ -38934,7 +38941,7 @@ a.u-link.u-text-hover-grey-90:hover {
 
   .u-header .u-menu-1 {
     width: auto;
-    margin-right: calc(((100% - 1140px) / 2) + 256px);
+    margin-right: calc(((100% - 720px) / 2) + 37px);
   }
 
   .u-header .u-social-icons-1 {
@@ -38957,7 +38964,7 @@ a.u-link.u-text-hover-grey-90:hover {
   }
 
   .u-header .u-menu-1 {
-    margin-right: calc(((100% - 1140px) / 2) + 346px);
+    margin-right: calc(((100% - 540px) / 2) + 37px);
   }
 
   .u-header .u-social-icons-1 {
@@ -38984,7 +38991,7 @@ a.u-link.u-text-hover-grey-90:hover {
   }
 
   .u-header .u-menu-1 {
-    margin-right: calc(((100% - 1140px) / 2) + 400px);
+    margin-right: calc(((100% - 340px) / 2) + 37px);
   }
 
   .u-header .u-social-icons-1 {
