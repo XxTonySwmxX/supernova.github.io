@@ -16228,7 +16228,6 @@ html {
 .u-body {
   font-size: 1rem;
   line-height: 1.6;
-  
 }
 .u-body h1,
 .u-body h2,
@@ -19965,11 +19964,8 @@ a.pswp__share--download:hover {
   overflow-y: hidden;
   scrollbar-width: none;
 }
-
-
 .u-layout-horizontal .u-repeater::-webkit-scrollbar,
 .u-layout-horizontal .u-gallery-inner::-webkit-scrollbar {
-  
   display: none;
 }
 .u-layout-horizontal .u-gallery-inner {
@@ -38029,7 +38025,7 @@ a.u-link.u-text-hover-grey-90:hover {
 
         .u-button-style.u-border-custom-color-4
         {
-            border-color: #d9d9d9  !important;
+            border-color: #930001 !important;
             color: #930001 !important;
             background-color: transparent !important;
         }
@@ -38856,7 +38852,6 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-nav-1 {
   font-size: 1rem;
-  letter-spacing: normal;
 }
 
 .u-header .u-sidenav-1 {
@@ -38866,10 +38861,11 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-header .u-nav-2 {
-  font-size: 1rem;
+  font-size: 1.25rem;
   letter-spacing: 0px;
   margin-right: auto;
   margin-left: auto;
+  font-weight: 700;
 }
 
 .u-header .u-social-icons-1 {
@@ -38914,6 +38910,10 @@ a.u-link.u-text-hover-grey-90:hover {
   .u-header .u-menu-1 {
     margin-top: -54px;
     margin-right: calc(((100% - 940px) / 2) + 37px);
+  }
+
+  .u-header .u-nav-1 {
+    letter-spacing: normal;
   }
 
   .u-header .u-social-icons-1 {
@@ -39049,10 +39049,20 @@ a.u-link.u-text-hover-grey-90:hover {
   margin: -26px auto 0;
 }
 
+.u-footer .u-btn-1 {
+  background-image: none;
+  padding: 0;
+}
+
 .u-footer .u-text-2 {
   font-weight: 700;
   font-size: 1.125rem;
   margin: 60px 859px 0 26px;
+}
+
+.u-footer .u-btn-2 {
+  background-image: none;
+  padding: 0;
 }
 
 .u-footer .u-text-3 {
@@ -39062,10 +39072,20 @@ a.u-link.u-text-hover-grey-90:hover {
   margin: -28px auto 0;
 }
 
+.u-footer .u-btn-3 {
+  background-image: none;
+  padding: 0;
+}
+
 .u-footer .u-text-4 {
   font-weight: 700;
   font-size: 1.125rem;
   margin: -56px 18px 60px 867px;
+}
+
+.u-footer .u-btn-4 {
+  background-image: none;
+  padding: 0;
 }
 @media (max-width: 1199px) {
   .u-footer .u-sheet-1 {
