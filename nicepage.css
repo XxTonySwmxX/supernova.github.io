@@ -38852,6 +38852,7 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-nav-1 {
   font-size: 1rem;
+  letter-spacing: normal;
 }
 
 .u-header .u-sidenav-1 {
@@ -38860,12 +38861,22 @@ a.u-link.u-text-hover-grey-90:hover {
   margin-left: -2px;
 }
 
+.u-header .u-menu-close-1 {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.u-header .u-image-3 {
+  width: 228px;
+  height: 74px;
+  margin: 24px 45px 0 auto;
+}
+
 .u-header .u-nav-2 {
   font-size: 1.25rem;
   letter-spacing: 0px;
-  margin-right: auto;
-  margin-left: auto;
   font-weight: 700;
+  margin: 20px 99px 0 auto;
 }
 
 .u-header .u-social-icons-1 {
@@ -38873,7 +38884,7 @@ a.u-link.u-text-hover-grey-90:hover {
   min-height: 16px;
   width: 158px;
   min-width: 94px;
-  margin: -31px calc(((100% - 1140px) / 2) + 195px) 48px auto;
+  margin: -27px calc(((100% - 1140px) / 2) + 194px) 44px auto;
 }
 
 .u-header .u-icon-1 {
@@ -38912,10 +38923,6 @@ a.u-link.u-text-hover-grey-90:hover {
     margin-right: calc(((100% - 940px) / 2) + 37px);
   }
 
-  .u-header .u-nav-1 {
-    letter-spacing: normal;
-  }
-
   .u-header .u-social-icons-1 {
     width: 158px;
     margin-top: -32px;
@@ -38944,6 +38951,10 @@ a.u-link.u-text-hover-grey-90:hover {
     margin-right: calc(((100% - 720px) / 2) + 37px);
   }
 
+  .u-header .u-image-3 {
+    margin-top: 20px;
+  }
+
   .u-header .u-social-icons-1 {
     margin-right: calc(((100% - 1140px) / 2) + 366px);
   }
@@ -38965,6 +38976,10 @@ a.u-link.u-text-hover-grey-90:hover {
 
   .u-header .u-menu-1 {
     margin-right: calc(((100% - 540px) / 2) + 37px);
+  }
+
+  .u-header .u-nav-2 {
+    margin-top: 13px;
   }
 
   .u-header .u-social-icons-1 {
@@ -38992,6 +39007,10 @@ a.u-link.u-text-hover-grey-90:hover {
 
   .u-header .u-menu-1 {
     margin-right: calc(((100% - 340px) / 2) + 37px);
+  }
+
+  .u-header .u-nav-2 {
+    margin-top: 0;
   }
 
   .u-header .u-social-icons-1 {
